@@ -1,6 +1,6 @@
 import React from 'react'
-import {StyleSheet, View} from 'react-native'
-import {Button} from '@rneui/themed'
+import { StyleSheet, View } from 'react-native'
+import { Button } from '@rneui/themed'
 
 export default function StepsFooter() {
   return (

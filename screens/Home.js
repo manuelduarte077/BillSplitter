@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import {t} from 'react-native-tailwindcss'
+import React, { useEffect, useState } from 'react'
+import { t } from 'react-native-tailwindcss'
 
-import {FlatList, View, Text, StyleSheet} from 'react-native'
-import {Icon} from '@rneui/base'
+import { FlatList, View, Text, StyleSheet } from 'react-native'
+import { Icon } from '@rneui/base'
 import ItemBill from '../components/ItemBill'
 
-export function Home({navigation, route}) {
-  const [bills, setBills] = useState([{id: 1, name: 'test'}])
+export function Home({ navigation, route }) {
+  const [bills, setBills] = useState([{ id: 1, name: 'test' }])
   const newBill = route.params?.newBill
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function Home({navigation, route}) {
   }, [newBill])
 
   return (
-    <View style={{height: '100%'}}>
+    <View style={{ height: '100%' }}>
       {bills.length === 0 ? (
         <Text style={[style.noBills, t.textGray500]}>
           You don't have bills yet
@@ -27,10 +27,10 @@ export function Home({navigation, route}) {
           style={style.list}
           data={bills}
           keyExtractor={(item) => item.id}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <ItemBill
               bill={item}
-              onPress={(bill) => navigation.navigate('BillView', {bill})}
+              onPress={(bill) => navigation.navigate('BillView', { bill })}
             />
           )}
         />

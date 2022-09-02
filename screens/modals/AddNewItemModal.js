@@ -1,10 +1,10 @@
-import React, {useCallback, useState} from 'react'
+import React, { useCallback, useState } from 'react'
 
-import {View, Alert, StyleSheet, Text} from 'react-native'
-import {Button, Input} from '@rneui/themed'
-import {v4 as uuidv4} from 'uuid'
+import { View, Alert, StyleSheet, Text } from 'react-native'
+import { Button, Input } from '@rneui/themed'
+import { v4 as uuidv4 } from 'uuid'
 
-export default function AddNewItemModal({navigation}) {
+export default function AddNewItemModal({ navigation }) {
   const [description, setDescription] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [price, setPrice] = useState('')
@@ -24,7 +24,7 @@ export default function AddNewItemModal({navigation}) {
 
     navigation.navigate({
       name: 'BillView',
-      params: {newItem},
+      params: { newItem },
       merge: true,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps

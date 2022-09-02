@@ -1,10 +1,10 @@
-import React, {useCallback, useState} from 'react'
+import React, { useCallback, useState } from 'react'
 
-import {View, Alert} from 'react-native'
-import {Button, Input} from '@rneui/themed'
-import {v4 as uuidv4} from 'uuid'
+import { View, Alert } from 'react-native'
+import { Button, Input } from '@rneui/themed'
+import { v4 as uuidv4 } from 'uuid'
 
-export default function NewBillModal({navigation}) {
+export default function NewBillModal({ navigation }) {
   const [name, setName] = useState('')
 
   const handleSubmit = useCallback(() => {
@@ -18,7 +18,7 @@ export default function NewBillModal({navigation}) {
       name,
     }
 
-    navigation.navigate('Home', {newBill})
+    navigation.navigate('Home', { newBill })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name])
 

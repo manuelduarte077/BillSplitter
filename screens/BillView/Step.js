@@ -1,17 +1,17 @@
-import {Button} from '@rneui/themed'
-import React, {useContext, useEffect, useState} from 'react'
+import { Button } from '@rneui/themed'
+import React, { useContext, useEffect, useState } from 'react'
 
-import {FlatList, View, Text, StyleSheet} from 'react-native'
-import {t} from 'react-native-tailwindcss'
+import { FlatList, View, Text, StyleSheet } from 'react-native'
+import { t } from 'react-native-tailwindcss'
 
-import {BillContext} from './BillContext'
+import { BillContext } from './BillContext'
 import Item from '../../components/Item'
 
 /**
  * @param {object} props
  * @param {import("xstate").State} props.machine
  */
-export default function Step({machine}) {
+export default function Step({ machine }) {
   const context = useContext(BillContext)
 
   const [billItems, setBillItems] = useState([])
@@ -28,7 +28,7 @@ export default function Step({machine}) {
   }, 0)
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       {machine.matches('idle') && (
         <View>
           <Text style={[t.textCenter, t.textXl, t.mT1]}>
@@ -40,7 +40,7 @@ export default function Step({machine}) {
                 style={styles.list}
                 data={billItems}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <Item item={item} />}
+                renderItem={({ item }) => <Item item={item} />}
               />
               <Text style={[t.textCenter, t.textXl, t.mT1]}>
                 Total: ${total.toFixed(2)}

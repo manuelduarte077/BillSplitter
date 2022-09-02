@@ -1,8 +1,8 @@
 import React from 'react'
 
-import {View, StyleSheet, Text} from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 
-export function ColorBox({hexColor, name}) {
+export function ColorBox({ hexColor, name }) {
   const colorStyle = {
     backgroundColor: hexColor,
   }
