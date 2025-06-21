@@ -1,4 +1,4 @@
-package dev.donmanuel.app.billsplitter.composables
+package dev.donmanuel.app.billsplitter.presentation.ui.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import dev.donmanuel.app.billsplitter.model.BillSplit
-import dev.donmanuel.app.billsplitter.utils.formatCurrency
+import dev.donmanuel.app.billsplitter.common.extensions.formatCurrency
+import dev.donmanuel.app.billsplitter.domain.model.BillSplit
 
 @Composable
 fun BillSummary(billSplit: BillSplit) {
@@ -35,7 +35,6 @@ fun BillSummary(billSplit: BillSplit) {
                 Text("Subtotal:")
                 Text(
                     "$${billSplit.subtotal.formatCurrency()}"
-
                 )
             }
 

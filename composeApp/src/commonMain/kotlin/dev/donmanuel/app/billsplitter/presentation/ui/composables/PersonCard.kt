@@ -1,4 +1,4 @@
-package dev.donmanuel.app.billsplitter.composables
+package dev.donmanuel.app.billsplitter.presentation.ui.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import billsplitter.composeapp.generated.resources.Res
 import billsplitter.composeapp.generated.resources.close
 import billsplitter.composeapp.generated.resources.person
-import dev.donmanuel.app.billsplitter.model.Person
-import dev.donmanuel.app.billsplitter.utils.formatCurrency
+import dev.donmanuel.app.billsplitter.common.extensions.formatCurrency
+import dev.donmanuel.app.billsplitter.domain.model.Person
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

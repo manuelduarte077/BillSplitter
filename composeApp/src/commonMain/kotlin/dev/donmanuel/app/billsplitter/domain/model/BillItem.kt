@@ -1,4 +1,4 @@
-package dev.donmanuel.app.billsplitter.model
+package dev.donmanuel.app.billsplitter.domain.model
 
 data class BillItem(
     val id: String,

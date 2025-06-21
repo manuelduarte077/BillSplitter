@@ -1,14 +1,13 @@
-package dev.donmanuel.app.billsplitter.composables
+package dev.donmanuel.app.billsplitter.presentation.ui.composables
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -23,9 +22,15 @@ fun TipAndTaxSection(
     tipPercentage: String,
     taxAmount: String,
     onTipChange: (String) -> Unit,
-    onTaxChange: (String) -> Unit
+    onTaxChange: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Card {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -37,27 +42,26 @@ fun TipAndTaxSection(
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(8.dp))
-
-            Row(
+            
+            OutlinedTextField(
+                value = tipPercentage,
+                onValueChange = onTipChange,
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                OutlinedTextField(
-                    value = tipPercentage,
-                    onValueChange = onTipChange,
-                    label = { Text("Tip %") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    modifier = Modifier.weight(1f)
-                )
-
-                OutlinedTextField(
-                    value = taxAmount,
-                    onValueChange = onTaxChange,
-                    label = { Text("Tax $") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    modifier = Modifier.weight(1f)
-                )
-            }
+                label = { Text("Tip Percentage (%)") },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            OutlinedTextField(
+                value = taxAmount,
+                onValueChange = onTaxChange,
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Tax Amount ($)") },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
+            )
         }
     }
 }
