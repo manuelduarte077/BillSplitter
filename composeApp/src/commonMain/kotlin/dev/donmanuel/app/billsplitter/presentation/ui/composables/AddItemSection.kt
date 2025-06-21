@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -58,7 +59,7 @@ fun AddItemSection(
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             OutlinedTextField(
                 value = description,
                 onValueChange = onDescriptionChange,
@@ -66,28 +67,30 @@ fun AddItemSection(
                 placeholder = { Text("Item description") },
                 singleLine = true
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             OutlinedTextField(
                 value = amount,
                 onValueChange = onAmountChange,
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Amount") },
+                placeholder = {
+                    Text("Amount")
+                },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 text = "Shared by:",
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
-            
+
             Spacer(modifier = Modifier.height(4.dp))
-            
+
             LazyRow(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -100,29 +103,33 @@ fun AddItemSection(
                     )
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-                
+
                 Button(
                     onClick = onAddItem,
-                    enabled = description.isNotBlank() && 
-                              amount.isNotBlank() && 
-                              selectedPeople.isNotEmpty() && 
-                              amount.toDoubleOrNull() != null && 
-                              (amount.toDoubleOrNull() ?: 0.0) > 0
+                    enabled = description.isNotBlank() &&
+                            amount.isNotBlank() &&
+                            selectedPeople.isNotEmpty() &&
+                            amount.toDoubleOrNull() != null &&
+                            (amount.toDoubleOrNull() ?: 0.0) > 0
                 ) {
                     Icon(
                         painterResource(Res.drawable.add),
-                        contentDescription = "Add item"
+                        contentDescription = "Add item",
+                        modifier = Modifier.size(28.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("Add Item")
+                    Text(
+                        "Add Item",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
                 }
             }
         }

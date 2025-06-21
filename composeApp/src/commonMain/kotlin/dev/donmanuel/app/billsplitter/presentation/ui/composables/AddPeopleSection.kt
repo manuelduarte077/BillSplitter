@@ -38,7 +38,7 @@ fun AddPeopleSection(
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
@@ -47,24 +47,30 @@ fun AddPeopleSection(
                     value = newPersonName,
                     onValueChange = onNameChange,
                     modifier = Modifier.weight(1f),
-                    placeholder = { Text("Person name") },
+                    placeholder = {
+                        Text("Person name")
+                    },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(onDone = { onAddPerson() })
                 )
-                
+
                 Spacer(modifier = Modifier.width(8.dp))
-                
+
                 Button(
                     onClick = onAddPerson,
                     enabled = newPersonName.isNotBlank()
                 ) {
                     Icon(
                         painterResource(Res.drawable.add),
-                        contentDescription = "Add person"
+                        contentDescription = "Add person",
+                        modifier = Modifier.size(28.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("Add")
+                    Text(
+                        "Add",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
                 }
             }
         }

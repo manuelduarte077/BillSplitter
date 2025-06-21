@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun BillSplitScreen() {
     val viewModel = AppModule.billSplitterViewModel
     val uiState = viewModel.uiState
 

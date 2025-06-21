@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -51,7 +52,8 @@ fun PersonCard(
                 Icon(
                     painterResource(Res.drawable.person),
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(28.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
@@ -72,7 +74,8 @@ fun PersonCard(
                 IconButton(onClick = onRemove) {
                     Icon(
                         painterResource(Res.drawable.close),
-                        contentDescription = "Remove person"
+                        contentDescription = "Remove person",
+                        modifier = Modifier.size(28.dp)
                     )
                 }
             }
