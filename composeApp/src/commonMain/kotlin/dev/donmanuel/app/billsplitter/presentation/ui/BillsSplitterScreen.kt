@@ -1,12 +1,13 @@
 package dev.donmanuel.app.billsplitter.presentation.ui
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import billsplitter.composeapp.generated.resources.Res
@@ -22,6 +23,19 @@ fun BillSplitScreen() {
     val viewModel = AppModule.billSplitterViewModel
     val uiState = viewModel.uiState
     var showAddItemDialog by remember { mutableStateOf(false) }
+    
+    // Add scroll state to track scrolling
+    val scrollState = rememberLazyListState()
+    
+    // Track if the user is scrolling up or down
+    val isScrollingUp = remember {
+        derivedStateOf {
+            // If the first visible item is at the top, or we're scrolling up
+            scrollState.firstVisibleItemIndex == 0 || 
+            scrollState.firstVisibleItemScrollOffset == 0 ||
+            !scrollState.canScrollBackward
+        }
+    }
 
     MaterialTheme {
         Surface(
@@ -57,21 +71,28 @@ fun BillSplitScreen() {
                 },
                 floatingActionButton = {
                     if (uiState.billSplit.people.isNotEmpty()) {
-                        FloatingActionButton(
-                            onClick = { showAddItemDialog = true },
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        AnimatedVisibility(
+                            visible = isScrollingUp.value,
+                            enter = fadeIn() + slideInVertically { it },
+                            exit = fadeOut() + slideOutVertically { it }
                         ) {
-                            Icon(
-                                painterResource(Res.drawable.add),
-                                contentDescription = "Add Item",
-                                modifier = Modifier.size(24.dp)
-                            )
+                            FloatingActionButton(
+                                onClick = { showAddItemDialog = true },
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            ) {
+                                Icon(
+                                    painterResource(Res.drawable.add),
+                                    contentDescription = "Add Item",
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
                         }
                     }
                 }
             ) { paddingValues ->
                 LazyColumn(
+                    state = scrollState,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues),

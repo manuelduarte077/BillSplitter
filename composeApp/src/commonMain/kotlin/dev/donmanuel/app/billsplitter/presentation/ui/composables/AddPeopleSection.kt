@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -37,13 +36,18 @@ fun AddPeopleSection(
         
         Spacer(modifier = Modifier.height(8.dp))
         
-        var name by remember { mutableStateOf(newPersonName) }
+        var name by remember(newPersonName) { mutableStateOf(newPersonName) }
         var isError by remember { mutableStateOf(false) }
         val focusRequester = remember { FocusRequester() }
-        val focusManager = LocalFocusManager.current
-        
+
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
+        }
+        LaunchedEffect(newPersonName) {
+            if (newPersonName.isEmpty() && name.isNotEmpty()) {
+                name = ""
+                focusRequester.requestFocus()
+            }
         }
         
         Row(
@@ -80,7 +84,6 @@ fun AddPeopleSection(
                     onDone = {
                         if (name.isNotBlank()) {
                             onAddPerson()
-                            focusManager.clearFocus()
                         } else {
                             isError = true
                         }
@@ -95,7 +98,6 @@ fun AddPeopleSection(
                 onClick = {
                     if (name.isNotBlank()) {
                         onAddPerson()
-                        focusManager.clearFocus()
                     } else {
                         isError = true
                     }
