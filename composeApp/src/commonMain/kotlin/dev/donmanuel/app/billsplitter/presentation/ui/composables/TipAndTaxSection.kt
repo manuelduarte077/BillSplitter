@@ -1,13 +1,9 @@
 package dev.donmanuel.app.billsplitter.presentation.ui.composables
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -16,6 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import billsplitter.composeapp.generated.resources.Res
+import billsplitter.composeapp.generated.resources.percent
+import billsplitter.composeapp.generated.resources.receipt
+import dev.donmanuel.app.billsplitter.presentation.ui.composables.common.BillSplitterCard
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun TipAndTaxSection(
@@ -25,43 +26,60 @@ fun TipAndTaxSection(
     onTaxChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
+    BillSplitterCard(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
                 text = "Tip & Tax",
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
             )
-            Spacer(modifier = Modifier.height(8.dp))
             
-            OutlinedTextField(
-                value = tipPercentage,
-                onValueChange = onTipChange,
+            Row(
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Tip Percentage (%)") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            OutlinedTextField(
-                value = taxAmount,
-                onValueChange = onTaxChange,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text("Tax Amount ($)") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
-            )
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                OutlinedTextField(
+                    value = tipPercentage,
+                    onValueChange = onTipChange,
+                    modifier = Modifier.weight(1f),
+                    label = { Text("Tip %") },
+                    placeholder = { Text("0") },
+                    leadingIcon = {
+                        Icon(
+                            painterResource(Res.drawable.percent),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    shape = RoundedCornerShape(12.dp),
+                )
+                
+                OutlinedTextField(
+                    value = taxAmount,
+                    onValueChange = onTaxChange,
+                    modifier = Modifier.weight(1f),
+                    label = { Text("Tax $") },
+                    placeholder = { Text("0.00") },
+                    leadingIcon = {
+                        Icon(
+                            painterResource(Res.drawable.receipt),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    shape = RoundedCornerShape(12.dp),
+                )
+            }
         }
     }
 }
