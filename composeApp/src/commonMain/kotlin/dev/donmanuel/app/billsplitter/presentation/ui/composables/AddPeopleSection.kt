@@ -36,16 +36,15 @@ fun AddPeopleSection(
         
         Spacer(modifier = Modifier.height(8.dp))
         
-        var name by remember(newPersonName) { mutableStateOf(newPersonName) }
         var isError by remember { mutableStateOf(false) }
         val focusRequester = remember { FocusRequester() }
 
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
         }
+        
         LaunchedEffect(newPersonName) {
-            if (newPersonName.isEmpty() && name.isNotEmpty()) {
-                name = ""
+            if (newPersonName.isEmpty()) {
                 focusRequester.requestFocus()
             }
         }
@@ -55,9 +54,8 @@ fun AddPeopleSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
-                value = name,
+                value = newPersonName,
                 onValueChange = { 
-                    name = it
                     onNameChange(it)
                     isError = false
                 },
@@ -82,7 +80,7 @@ fun AddPeopleSection(
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        if (name.isNotBlank()) {
+                        if (newPersonName.isNotBlank()) {
                             onAddPerson()
                         } else {
                             isError = true
@@ -96,7 +94,7 @@ fun AddPeopleSection(
             
             Button(
                 onClick = {
-                    if (name.isNotBlank()) {
+                    if (newPersonName.isNotBlank()) {
                         onAddPerson()
                     } else {
                         isError = true

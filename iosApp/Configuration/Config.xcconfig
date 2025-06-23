@@ -1,6 +1,6 @@
 TEAM_ID=
 
-PRODUCT_NAME=billsplitter
+PRODUCT_NAME=Bill Splitter
 PRODUCT_BUNDLE_IDENTIFIER=dev.donmanuel.app.billsplitter.billsplitter$(TEAM_ID)
 
 CURRENT_PROJECT_VERSION=1

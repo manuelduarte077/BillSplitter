@@ -46,7 +46,11 @@ fun TipAndTaxSection(
             ) {
                 OutlinedTextField(
                     value = tipPercentage,
-                    onValueChange = onTipChange,
+                    onValueChange = { newValue ->
+                        if (newValue.isEmpty() || newValue.matches(Regex("^\\d*\\.?\\d*$"))) {
+                            onTipChange(newValue)
+                        }
+                    },
                     modifier = Modifier.weight(1f),
                     label = { Text("Tip %") },
                     placeholder = { Text("0") },
@@ -64,7 +68,11 @@ fun TipAndTaxSection(
                 
                 OutlinedTextField(
                     value = taxAmount,
-                    onValueChange = onTaxChange,
+                    onValueChange = { newValue ->
+                        if (newValue.isEmpty() || newValue.matches(Regex("^\\d*\\.?\\d*$"))) {
+                            onTaxChange(newValue)
+                        }
+                    },
                     modifier = Modifier.weight(1f),
                     label = { Text("Tax $") },
                     placeholder = { Text("0.00") },
